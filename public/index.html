@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced AI Image Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced AI Image Generator</h1>
+
+        <form id="image-form">
+            <fieldset>
+                <legend>Image Generation Parameters</legend>
+            <div class="form-group">
+                <label for="prompt">Image Prompt:</label>
+                <textarea id="prompt" name="prompt" required></textarea>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="model">Model:</label>
+                    <select id="model" name="model">
+                        <option value="fal-ai/flux-pro">Flux Pro</option>
+                        <option value="fal-ai/flux/dev">Flux Dev</option>
+                        <option value="fal-ai/flux-realism">Flux Realism</option>
+                        <option value="fal-ai/flux/schnell">Flux Schnell</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="image_size">Image Size:</label>
+                    <select id="image_size" name="image_size">
+                        <option value="landscape_4_3">Landscape 4:3</option>
+                        <option value="square_hd">Square HD</option>
+                        <option value="square">Square</option>
+                        <option value="portrait_4_3">Portrait 4:3</option>
+                        <option value="portrait_16_9">Portrait 16:9</option>
+                        <option value="landscape_16_9">Landscape 16:9</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="num_inference_steps">Inference Steps:</label>
+                    <input type="number" id="num_inference_steps" name="num_inference_steps" value="28" min="1" max="100">
+                </div>
+                
+                <div class="form-group">
+                    <label for="seed">Seed (optional):</label>
+                    <input type="number" id="seed" name="seed">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="guidance_scale">Guidance Scale:</label>
+                    <input type="number" id="guidance_scale" name="guidance_scale" value="3.5" step="0.1" min="0" max="20">
+                </div>
+                
+                <div class="form-group">
+                    <label for="num_images">Number of Images:</label>
+                    <input type="number" id="num_images" name="num_images" value="1" min="1" max="4">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group custom-checkbox">
+                    <input type="checkbox" id="enable_safety_checker" name="enable_safety_checker" checked>
+                    <label for="enable_safety_checker">
+                        <span class="checkmark"></span>
+                        Enable Safety Checker
+                    </label>
+                </div>
+                
+                <div class="form-group" id="safety_tolerance_group">
+                    <label for="safety_tolerance">Safety Tolerance:</label>
+                    <select id="safety_tolerance" name="safety_tolerance">
+                        <option value="1">1 (Strictest)</option>
+                        <option value="2" selected>2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6 (Most Permissive)</option>
+                    </select>
+                </div>
+            </div>
+            </fieldset>
+
+            <div class="form-group">
+                <label for="api-key">API Key:</label>
+                <input type="text" id="api-key" name="api-key" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Generate Image</button>
+        </form>
+
+        <div id="save-container" style="display:none;">
+            <button id="save-image" class="btn btn-secondary">Save Image</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
